@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadmus: The Scroll Quest</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="game-container">
+
+    <!-- START SCREEN -->
+    <div id="screen-start" class="screen active">
+      <h1>CADMUS</h1>
+      <h2>The Scroll Quest</h2>
+      <p>Collect 5 scrolls &mdash; unscramble the word &mdash; advance the legend.</p>
+      <p class="blink">Press ENTER to Begin</p>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div id="screen-game" class="screen">
+      <!-- HUD -->
+      <div id="hud">
+        <div id="hud-health">
+          <span class="label">HP</span>
+          <div id="health-bar"><div id="health-fill"></div></div>
+        </div>
+        <div id="hud-level"><span id="level-name">Level 1: The Agora</span></div>
+        <div id="hud-scrolls"><span class="label">Scrolls</span> <span id="scroll-count">0</span>/5</div>
+      </div>
+      <!-- Canvas -->
+      <canvas id="game-canvas" width="960" height="540"></canvas>
+    </div>
+
+    <!-- ANAGRAM SCREEN -->
+    <div id="screen-anagram" class="screen">
+      <h2>Unscramble the Scroll!</h2>
+      <p id="anagram-prompt">Arrange the letters to form the word:</p>
+      <div id="letter-slots"></div>
+      <div id="letter-bank"></div>
+      <p id="anagram-hint" class="hidden"></p>
+      <p class="key-hint">&larr; &rarr; Select &nbsp;|&nbsp; ENTER Confirm &nbsp;|&nbsp; BACKSPACE Clear</p>
+    </div>
+
+    <!-- PAUSE SCREEN -->
+    <div id="screen-pause" class="screen">
+      <h2>PAUSED</h2>
+      <ul id="pause-menu">
+        <li class="selected" data-action="resume">Resume</li>
+        <li data-action="restart">Restart Level</li>
+        <li data-action="quit">Quit to Menu</li>
+      </ul>
+      <p class="key-hint">&uarr; &darr; Navigate &nbsp;|&nbsp; ENTER Select</p>
+    </div>
+
+    <!-- GAME OVER SCREEN -->
+    <div id="screen-gameover" class="screen">
+      <h2>GAME OVER</h2>
+      <p>Cadmus has fallen&hellip;</p>
+      <p class="blink">Press ENTER to Try Again</p>
+    </div>
+
+    <!-- LEVEL COMPLETE SCREEN -->
+    <div id="screen-complete" class="screen">
+      <h2>LEVEL COMPLETE!</h2>
+      <p id="complete-word"></p>
+      <p class="blink">Press ENTER to Continue</p>
+    </div>
+
+  </div><!-- /game-container -->
+
+  <!-- Game modules (load order matters) -->
+  <script src="js/input.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/enemies.js"></script>
+  <script src="js/level.js"></script>
+  <script src="js/anagram.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
