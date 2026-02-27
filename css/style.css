@@ -1,0 +1,200 @@
+/* ============================================================
+   Cadmus: The Scroll Quest — Global Stylesheet
+   Palette: #333333 | #1EDB07 | #9EFF8B | #FFFFFF
+   ============================================================ */
+
+/* --- Reset & Base --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --col-bg:       #333333;
+  --col-primary:  #1EDB07;
+  --col-mid:      #9EFF8B;
+  --col-text:     #FFFFFF;
+  --font-pixel: 'Courier New', Courier, monospace;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  background: var(--col-bg);
+  color: var(--col-text);
+  font-family: var(--font-pixel);
+  overflow: hidden;
+  user-select: none;
+}
+
+/* --- Game Container --- */
+#game-container {
+  position: relative;
+  width: 960px;
+  height: 540px;
+  margin: 0 auto;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--col-bg);
+  outline: 2px solid var(--col-primary);
+}
+
+/* --- Screens --- */
+.screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%; height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  text-align: center;
+  padding: 2rem;
+}
+.screen.active { display: flex; }
+
+/* --- Typography --- */
+h1 {
+  font-size: 5rem;
+  letter-spacing: 0.4rem;
+  color: var(--col-primary);
+  text-shadow: 0 0 20px var(--col-primary);
+  margin-bottom: 0.5rem;
+}
+h2 {
+  font-size: 2.5rem;
+  color: var(--col-mid);
+  letter-spacing: 0.2rem;
+  margin-bottom: 1.5rem;
+}
+p {
+  font-size: 1rem;
+  color: var(--col-text);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+.key-hint {
+  font-size: 0.75rem;
+  color: var(--col-mid);
+  margin-top: 1.5rem;
+  letter-spacing: 0.05rem;
+}
+.label {
+  color: var(--col-primary);
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+/* --- Blink animation --- */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.blink {
+  color: var(--col-primary);
+  animation: blink 1.2s step-end infinite;
+  font-size: 1.1rem;
+  letter-spacing: 0.1rem;
+}
+
+/* ============================================================
+   HUD (visible during gameplay)
+   ============================================================ */
+#hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 6px 12px;
+  background: rgba(0,0,0,0.6);
+  border-bottom: 1px solid var(--col-primary);
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 10;
+  height: 36px;
+}
+#hud-health { display: flex; align-items: center; gap: 8px; }
+#health-bar {
+  width: 120px; height: 12px;
+  background: var(--col-bg);
+  border: 1px solid var(--col-primary);
+  border-radius: 2px;
+  overflow: hidden;
+}
+#health-fill {
+  width: 100%; height: 100%;
+  background: var(--col-primary);
+  transition: width 0.2s ease;
+}
+#hud-level { font-size: 0.8rem; color: var(--col-mid); letter-spacing: 0.05rem; }
+#hud-scrolls { font-size: 0.85rem; }
+#scroll-count { color: var(--col-primary); font-weight: bold; }
+
+/* Game canvas sits below the HUD */
+#game-canvas {
+  display: block;
+  position: absolute;
+  top: 36px; left: 0;
+  width: 960px;
+  height: 504px; /* 540 - 36 HUD */
+  background: var(--col-bg);
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* ============================================================
+   Anagram Screen
+   ============================================================ */
+#letter-slots, #letter-bank {
+  display: flex;
+  gap: 10px;
+  margin: 1rem 0;
+  justify-content: center;
+}
+.letter-tile {
+  width: 52px; height: 52px;
+  background: var(--col-bg);
+  border: 2px solid var(--col-primary);
+  color: var(--col-text);
+  font-size: 1.8rem;
+  font-family: var(--font-pixel);
+  display: flex; align-items: center; justify-content: center;
+  cursor: default;
+  text-transform: uppercase;
+  transition: border-color 0.1s;
+}
+.letter-tile.selected { border-color: var(--col-mid); background: rgba(30,219,7,0.15); }
+.letter-tile.empty    { border-color: #555; }
+
+#anagram-hint {
+  color: var(--col-mid);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+.hidden { display: none !important; }
+
+/* ============================================================
+   Pause Menu
+   ============================================================ */
+#pause-menu {
+  list-style: none;
+  margin: 1rem 0;
+}
+#pause-menu li {
+  padding: 0.6rem 2rem;
+  font-size: 1.1rem;
+  color: var(--col-text);
+  cursor: default;
+  letter-spacing: 0.1rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  margin-bottom: 0.4rem;
+  transition: all 0.1s;
+}
+#pause-menu li.selected {
+  border-color: var(--col-primary);
+  color: var(--col-primary);
+  background: rgba(30,219,7,0.1);
+}
+
+/* ============================================================
+   Scrollbar hide
+   ============================================================ */
+::-webkit-scrollbar { display: none; }
